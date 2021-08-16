@@ -36,24 +36,22 @@ class _ChewieDemoState extends State<ChewieDemo> {
   }
 
   Future<void> initializeAutoRotatePlayer() async {
-    _videoPlayerController1 = VideoPlayerController.network(
-        'https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4');
+    _videoPlayerController1 = VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4');
     await _videoPlayerController1.initialize();
-    _videoPlayerController2 = VideoPlayerController.network(
-        'https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4');
+    _videoPlayerController2 =
+        VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4');
     await _videoPlayerController2.initialize();
     _chewieController = ChewieController(
         videoPlayerController: _videoPlayerController1,
         autoPlay: true,
         looping: true,
-        routePageBuilder: (BuildContext context, Animation<double> animation,
-            Animation<double> secondAnimation, provider) {
+        routePageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondAnimation, provider) {
           return AnimatedBuilder(
             animation: animation,
             builder: (BuildContext context, Widget child) {
               return VideoScaffold(
                 child: Scaffold(
-                  resizeToAvoidBottomPadding: false,
+                  resizeToAvoidBottomInset: false,
                   body: Container(
                     alignment: Alignment.center,
                     color: Colors.black,
@@ -104,9 +102,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
           children: <Widget>[
             Expanded(
               child: Center(
-                child: _chewieController != null &&
-                        _chewieController
-                            .videoPlayerController.value.initialized
+                child: _chewieController != null && _chewieController.videoPlayerController.value.initialized
                     ? Chewie(
                         controller: _chewieController,
                       )
